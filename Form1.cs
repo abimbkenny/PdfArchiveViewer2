@@ -1,10 +1,11 @@
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Web.WebView2.WinForms;
 using System;
-using System.IO;
 using System.Data;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
-using Microsoft.Web.WebView2.WinForms;
 
 namespace PdfArchiveViewer
 {
@@ -17,6 +18,17 @@ namespace PdfArchiveViewer
         public Form1()
         {
             InitializeComponent();
+
+            // 2. Build the configuration reader
+            var config = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            // 3. Pull the string from the JSON file
+            _connectionString = config.GetConnectionString("DefaultConnection") ?? "";
+
+            // ... any other code you had in your constructor ...
 
             // Wire up the events manually if you haven't done it in the Designer
             this.Load += Form1_Load;

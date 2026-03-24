@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             txtUsername = new TextBox();
             txtPassword = new TextBox();
             btnLogin = new Button();
             Username = new Label();
             label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
             // txtUsername
@@ -79,16 +81,27 @@
             label1.TabIndex = 4;
             label1.Text = "Password";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(348, 386);
+            label2.Name = "label2";
+            label2.Size = new Size(158, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Develop by Kenny Consentia";
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(Username);
             Controls.Add(btnLogin);
             Controls.Add(txtPassword);
             Controls.Add(txtUsername);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "LoginForm";
             Text = "LoginForm";
             Load += LoginForm_Load;
@@ -103,5 +116,6 @@
         private Button btnLogin;
         private Label Username;
         private Label label1;
+        private Label label2;
     }
 }
