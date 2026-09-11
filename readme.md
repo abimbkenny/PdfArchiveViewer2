@@ -1,11 +1,11 @@
-# AER_FileMerger
+# PDF Archive Viewer
 
 [![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.8-blue.svg)](https://dotnet.microsoft.com/download/dotnet-framework/net48)
 [![Language](https://img.shields.io/badge/C%23-Latest-green.svg)](https://docs.microsoft.com/en-us/dotnet/csharp/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20Service-lightgrey.svg)](https://docs.microsoft.com/en-us/dotnet/framework/windows-services/)
 [![License](https://img.shields.io/badge/License-Internal%20%2F%20Proprietary-red.svg)](#)
 
-`AER_FileMerger` is a automated background utility built in C# (.NET Framework 4.8) designed to monitor, retrieve, and consolidate multi-page document batches (including PDFs, logs, and regulatory submissions) into unified archive files. 
+`PDF Archive Viewer` is a automated background utility built in C# (.NET Framework 4.8) designed to monitor, retrieve, and consolidate multi-page document batches (including PDFs, logs, and regulatory submissions) into unified archive files. 
 
 Originally structured as a headless **Windows Service**, this project has been modernized to support **Dual-Execution Modes**—allowing developers to run and debug the core service logic in an interactive console environment or deploy it directly into the Windows Service Control Manager (`services.msc`).
 
@@ -30,7 +30,7 @@ The application evaluates its running context upon launch to determine whether t
 
 ```mermaid
 graph TD
-    A[Launch AER_FileMerger.exe] --> B{Environment.UserInteractive?}
+    A[Launch PDF Archive Viewer.exe] --> B{Environment.UserInteractive?}
     
     %% Interactive Branch
     B -- True (Local Debug) --> C[Console Output Engine]
@@ -55,7 +55,7 @@ graph TD
 ```mermaid
 sequenceDiagram
     autonumber
-    participant App as AER_FileMerger
+    participant App as PDF Archive Viewer
     participant DB as SQL Server Database
     participant FS as File System / Input Directory
     participant Out as Output Archive Directory
@@ -84,7 +84,7 @@ sequenceDiagram
 
 ## 🗄️ Database Setup & Configuration
 
-`AER_FileMerger` uses SQL Server for job orchestration and activity logging. 
+`PDF Archive Viewer` uses SQL Server for job orchestration and activity logging. 
 
 ### Configuration File (`App.config`)
 
@@ -95,10 +95,10 @@ Ensure your database connection string and parameters are correctly configured:
 <configuration>
   <appSettings>
     <add key="DB_Server" value="YOUR_SERVER_NAME" />
-    <add key="DB_Username" value="sa" />
+    <add key="DB_Username" value="my username" />
     <add key="DB_Password" value="YOUR_PASSWORD" />
-    <add key="SourceDirectory" value="C:\AER_Files\Input" />
-    <add key="OutputDirectory" value="C:\AER_Files\Output" />
+    <add key="SourceDirectory" value="C:\PDF_Files\Input" />
+    <add key="OutputDirectory" value="C:\PDF_Files\Output" />
   </appSettings>
   <startup> 
     <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
@@ -130,35 +130,7 @@ CREATE TABLE [dbo].[ProcessedRecords] (
 - **.NET Framework 4.8 SDK**
 - **SQL Server Management Studio (SSMS)** or active SQL Server instance
 
-### Running locally in Visual Studio
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/AER_FileMerger.git
-   ```
-2. Open `AER_FileMerger.sln` in Visual Studio.
-3. Verify that the project Output Type is set to **Console Application** (Properties -> Application -> Output type).
-4. Update `App.config` with valid database credentials.
-5. Press **F5** to run in **Interactive Mode**.
-
-### Installing as a Windows Service (Production Deployment)
-
-1. Open **Developer Command Prompt for Visual Studio** as Administrator.
-2. Build the project in `Release` configuration.
-3. Install the service using `installutil.exe`:
-   ```cmd
-   installutil.exe "C:\Path\To\Release\AER_FileMerger.exe"
-   ```
-4. Start the service via Windows Services Manager:
-   ```cmd
-   net start AER_FileMerger
-   ```
-5. To uninstall:
-   ```cmd
-   installutil.exe /u "C:\Path\To\Release\AER_FileMerger.exe"
-   ```
-
----
 
 ## 🛠️ Tech Stack & Dependencies
 
